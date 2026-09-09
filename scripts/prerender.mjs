@@ -17,6 +17,8 @@ import fs from "node:fs";
 import path from "node:path";
 
 import meta from "../src/data/RouteMetaData.json" with { type: "json" };
+import { renderRoutes } from "./render-routes.mjs";
+import { writeSitemap } from "./sitemap.mjs";
 
 const BUILD = path.resolve("build");
 const SITE = "https://www.saadaoui.it.com";
@@ -32,8 +34,31 @@ function set(html, pattern, replacement) {
 
 const template = fs.readFileSync(path.join(BUILD, "index.html"), "utf8");
 
+/*
+ * The body, not only the head.
+ *
+ * Each route's markup is rendered by React here, at build time, and placed
+ * inside the root element, so the words are in the file rather than assembled
+ * by a script afterwards. Google runs JavaScript and was indexing the site
+ * regardless — but its first pass saw an empty page, nothing that skips
+ * scripts saw anything at all, and a bundle that failed to load left a reader
+ * with a single sentence asking them to enable JavaScript.
+ */
+const bodies = await renderRoutes(Object.keys(meta.routes));
+
+/** Puts rendered markup inside the empty root element. */
+function withBody(html, route) {
+  const body = bodies[route];
+  if (!body) return html;
+  return set(html, /<div id="root">\s*<\/div>/, `<div id="root">${body}</div>`);
+}
+
+// The home page is the template itself, so it is written back over index.html.
+fs.writeFileSync(path.join(BUILD, "index.html"), withBody(template, "/"));
+console.log("prerendered / -> build/index.html");
+
 for (const [route, page] of Object.entries(meta.routes)) {
-  // "/" is already index.html — the template is its own output.
+  // "/" has just been written from the template above.
   if (route === "/") continue;
 
   const url = `${SITE}${route}`;
@@ -58,6 +83,14 @@ for (const [route, page] of Object.entries(meta.routes)) {
     `<meta name="twitter:description" content="${description}" />`);
 
   const file = `${route.replace(/^\//, "")}.html`;
-  fs.writeFileSync(path.join(BUILD, file), html);
+  fs.writeFileSync(path.join(BUILD, file), withBody(html, route));
   console.log(`prerendered ${route} -> build/${file}`);
 }
+
+// The sitemap is derived from what was just built, so it cannot drift again.
+const listed = writeSitemap({
+  buildDir: BUILD,
+  publicDir: path.resolve("public"),
+  routes: Object.keys(meta.routes).map((route) => (route === "/" ? "/" : route)),
+});
+console.log(`sitemap: ${listed} urls -> build/sitemap.xml`);
