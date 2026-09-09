@@ -4,6 +4,25 @@ import { TypeAnimation } from 'react-type-animation';
 import { Link as ScrollLink } from 'react-scroll';
 import SocialBtns from './SocialBtns';
 
+/**
+ * The roles the animation cycles through, as one sentence.
+ *
+ * Written out by hand this had already drifted — it still said "Java
+ * Developer" after the animation had moved on to technical analysis and
+ * full-stack work — so it is read from the same list the animation uses and
+ * cannot say something different from what the page shows.
+ */
+function rolesSentence(sequence) {
+  const roles = sequence
+    .filter((step) => typeof step === 'string')
+    .map((step) => step.replace(/^I'm an? /, ''));
+  if (!roles.length) return '';
+  const last = roles.pop();
+  return roles.length
+    ? `I'm a ${roles.join(', ')} and ${last}`
+    : `I'm a ${last}`;
+}
+
 export default function Hero({ data, socialData }) {
   const { imgUrl, name, heading, typingText, description, btnText, btnUrl } =
     data;
@@ -36,7 +55,7 @@ export default function Hero({ data, socialData }) {
                     here for anything reading the DOM, and the animation is marked
                     decorative so it is not announced twice to a screen reader. */}
                 <span className="visually-hidden">
-                  I'm a Functional Analyst and Java Developer
+                  {rolesSentence(typingText)}
                 </span>
                 <span aria-hidden="true">
                   <TypeAnimation

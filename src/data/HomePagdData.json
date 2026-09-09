@@ -1,6 +1,6 @@
 {
   "hero": {
-    "imgUrl": "/images/home-banner.png",
+    "imgUrl": "/images/home-banner.webp",
     "name": "Abdessalem Saadaoui",
     "heading": "Hey! I'm SAADAOUI",
     "typingText": [
@@ -129,7 +129,7 @@
     }
   ],
   "about": {
-    "imgSrc": "/images/about-banner.png",
+    "imgSrc": "/images/about-banner.webp",
     "miniTitle": "About Me",
     "title": "FUNCTIONAL & TECHNICAL ANALYST · <span>FULL-STACK</span> DEVELOPER",
     "description": "Functional & Technical Analyst based in Brussels, Belgium, with 5+ years bridging business needs and technical delivery across enterprise and SaaS environments. I gather, analyse and document business requirements, model processes with UML & BPMN, write functional specifications and API documentation (Swagger/OpenAPI), and manage stakeholders. I analyse how systems fit together — service boundaries, synchronous and asynchronous integration, error handling and logical data models — and translate that into designs engineering teams can build from. Embedded with hands-on full-stack development for close, clear collaboration with IT teams. Delivered functional analysis at enterprise scale across the Finance, Fitness, HR and logistics sectors (including Leejam Sports — 200+ locations, 100,000+ members). MBA in IT Management (2025). Arabic (native), English (C1), French (B2), Dutch (A2, improving). Available immediately. Before IT, an international professional Muay Thai & Kickboxing champion.",
@@ -187,7 +187,7 @@
         }
       },
       {
-        "thumbUrl": "/images/popup-project-3.png",
+        "thumbUrl": "/images/popup-project-3.webp",
         "title": "Business Process Modelling",
         "subTitle": "Functional Analysis · BPMN · UML",
         "details": {
@@ -469,7 +469,7 @@
       "title": "Let's Work Together",
       "subTitle": "Available immediately for Functional Analyst and Java Developer roles in Brussels and remote. Feel free to reach out."
     },
-    "contactImg": "/images/contact-us.png",
+    "contactImg": "/images/contact-us.webp",
     "contactInfo": [
       {
         "title": "Write an e-mail",

@@ -3,7 +3,7 @@ import { Icon } from '@iconify/react';
 import Aos from 'aos';
 import SectionHeading from './SectionHeading';
 
-const FALLBACK_IMG = '/images/about-banner.png';
+const FALLBACK_IMG = '/images/about-banner.webp';
 const INITIAL_COUNT = 15;
 
 /**

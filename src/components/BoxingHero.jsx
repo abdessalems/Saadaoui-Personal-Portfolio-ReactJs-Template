@@ -3,7 +3,7 @@ import { Icon } from '@iconify/react';
 import SocialBtns from './SocialBtns';
 import CountUp from './CountUp';
 
-const FALLBACK_IMG = '/images/about-banner.png';
+const FALLBACK_IMG = '/images/about-banner.webp';
 
 export default function BoxingHero({ data }) {
   const { imgUrl, name, nickname, heading, description, record, titles, social } =

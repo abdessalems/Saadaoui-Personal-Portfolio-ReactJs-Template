@@ -7,7 +7,7 @@ import React from 'react';
  * second "SAADAOUI" next to a logo that already says SA reads as a stutter.
  * The name is still announced to screen readers through the alt text.
  *
- * The PNG has its dark background baked in, so it sits in a rounded tile and
+ * The image has its dark background baked in, so it sits in a rounded tile and
  * reads as a badge in both themes rather than as a mistake on the light one.
  */
 export default function Logo() {
@@ -15,7 +15,7 @@ export default function Logo() {
     <span className="brand-logo">
       <span className="brand-emblem">
         <img
-          src="/images/logo-sa.png"
+          src="/images/logo-sa.webp"
           alt="Saadaoui Abdessalem"
           width="64"
           height="64"
