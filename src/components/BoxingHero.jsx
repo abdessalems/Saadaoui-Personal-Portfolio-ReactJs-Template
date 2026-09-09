@@ -55,6 +55,8 @@ export default function BoxingHero({ data }) {
               <img
                 src={imgUrl}
                 alt={name}
+                width="1254"
+                height="1254"
                 loading="lazy"
                 decoding="async"
                 onError={(e) => {

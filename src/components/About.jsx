@@ -14,12 +14,16 @@ export default function About({ data }) {
           <img
             src="/images/effect-1.svg"
             alt="Shape"
+            width="339"
+            height="339"
           />
         </div>
         <div className="effect-2">
           <img
             src="/images/effect-2.svg"
             alt="Shape"
+            width="151"
+            height="151"
           />
         </div>
         <div className="row align-items-center justify-content-center gy-5">
@@ -27,7 +31,18 @@ export default function About({ data }) {
             className="col-lg-6 col-xl-5"
           >
             <div className="about-banner text-center">
-              <img src={imgSrc} alt="About Abdessalem Saadaoui" loading="lazy" decoding="async" />
+              {/* The stylesheet gives this a width and lets the height follow
+                  the picture, so without the intrinsic size here the row has
+                  no height until the file lands and everything below it
+                  jumps. */}
+              <img
+                src={imgSrc}
+                alt="About Abdessalem Saadaoui"
+                width="1122"
+                height="1402"
+                loading="lazy"
+                decoding="async"
+              />
             </div>
           </div>
           <div className="col-lg-6 col-xl-5 ps-lg-3 ps-xl-4">

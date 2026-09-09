@@ -28,7 +28,14 @@ export default function Contact({ data, socialData }) {
             </div>
             <div className="col-lg-4 pe-md-5">
               <div className="contact-banner d-none d-lg-block">
-                <img src={contactImg} alt="Avatar" />
+                <img
+                  src={contactImg}
+                  alt="Avatar"
+                  width="1254"
+                  height="1254"
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
               <ContactInfo contactInfoData={contactInfo} />
               <SocialBtns socialBtns={socialData} />

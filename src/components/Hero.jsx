@@ -4,6 +4,11 @@ import { TypeAnimation } from 'react-type-animation';
 import { Link as ScrollLink } from 'react-scroll';
 import SocialBtns from './SocialBtns';
 
+/** The lines the animation types, without the pauses between them. */
+function typedLines(sequence) {
+  return sequence.filter((step) => typeof step === 'string');
+}
+
 /**
  * The roles the animation cycles through, as one sentence.
  *
@@ -13,9 +18,9 @@ import SocialBtns from './SocialBtns';
  * cannot say something different from what the page shows.
  */
 function rolesSentence(sequence) {
-  const roles = sequence
-    .filter((step) => typeof step === 'string')
-    .map((step) => step.replace(/^I'm an? /, ''));
+  const roles = typedLines(sequence).map((line) =>
+    line.replace(/^I'm an? /, ''),
+  );
   if (!roles.length) return '';
   const last = roles.pop();
   return roles.length
@@ -57,12 +62,26 @@ export default function Hero({ data, socialData }) {
                 <span className="visually-hidden">
                   {rolesSentence(typingText)}
                 </span>
-                <span aria-hidden="true">
-                  <TypeAnimation
-                    sequence={typingText}
-                    speed={0}
-                    repeat={Infinity}
-                  />
+                {/* Every line the animation will type is laid out here in the
+                    same grid cell, all but one of them invisible, so the
+                    heading is always as tall as the longest of them. Typed out
+                    on its own the line grew and shrank between one, two and
+                    three lines as the roles cycled, and everything below it
+                    moved by as much as 145px every couple of seconds, for as
+                    long as the page stayed open. */}
+                <span className="hs-typing" aria-hidden="true">
+                  {typedLines(typingText).map((line) => (
+                    <span className="hs-typing-sizer" key={line}>
+                      {line}
+                    </span>
+                  ))}
+                  <span className="hs-typing-line">
+                    <TypeAnimation
+                      sequence={typingText}
+                      speed={0}
+                      repeat={Infinity}
+                    />
+                  </span>
                 </span>
               </h2>
               <p
@@ -101,7 +120,17 @@ export default function Hero({ data, socialData }) {
           </div>
           <div className="col-lg-6">
             <div className="hs-banner">
-              <img src={imgUrl} alt="Abdessalem Saadaoui" fetchpriority="high" decoding="async" />
+              {/* The intrinsic size, so the browser can reserve the right
+                  shape before the file arrives instead of collapsing the
+                  column and pushing the page down when it loads. */}
+              <img
+                src={imgUrl}
+                alt="Abdessalem Saadaoui"
+                width="768"
+                height="1152"
+                fetchpriority="high"
+                decoding="async"
+              />
             </div>
           </div>
         </div>

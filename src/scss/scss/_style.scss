@@ -193,6 +193,23 @@ a {
       @include down-sm {
         margin: 0 0 var(--sp-3);
       }
+      /*
+       * The typed line, and every line it will ever type, share one grid cell.
+       * The heading is therefore always as tall as its longest role and the
+       * page below it never moves, at any width. Reserving a fixed number of
+       * lines instead would be wrong at some breakpoint, because the same three
+       * roles wrap onto one, two or three lines depending on how much room the
+       * column has.
+       */
+      .hs-typing {
+        display: grid;
+        > * {
+          grid-area: 1 / 1;
+        }
+      }
+      .hs-typing-sizer {
+        visibility: hidden;
+      }
     }
     .text {
       font-weight: 400;
